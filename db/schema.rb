@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180120175039) do
+ActiveRecord::Schema.define(version: 20180120200634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20180120175039) do
     t.bigint "district_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "party"
     t.index ["district_id"], name: "index_reps_on_district_id"
   end
 
@@ -36,6 +37,7 @@ ActiveRecord::Schema.define(version: 20180120175039) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "party"
     t.index ["state_id"], name: "index_senators_on_state_id"
   end
 

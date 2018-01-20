@@ -10,4 +10,5 @@ class User < ApplicationRecord
     self.district.rep
   end
 
+
 end

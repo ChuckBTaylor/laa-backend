@@ -6,6 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+require 'rest-client'
+require 'JSON'
+
+API_KEY = "hOsiWTOsFAa4UVwNKSWxME1RfXigd1mOs9owVI5g"
+
 al = State.create(name: "Alabama", abbreviation: "AL")
 counter = 1
 7.times do
@@ -356,7 +361,40 @@ counter = 1
   counter += 1
 end
 
+senator_string = RestClient.get('https://api.propublica.org/congress/v1/115/senate/members.json', headers={"X-API-Key": API_KEY})
 
-# User.create(phone_number: "7202975887", state: co, district: 2)
-#
-# User.create(phone_number: "5018279722")
+senator_data = JSON.parse(senator_string)
+senator_data['results'][0]['members'].each do |member|
+  if member['in_office']
+    Senator.create(
+      name: "#{member['first_name']} #{member['last_name']}",
+      party: member['party'],
+      state: State.find_by(abbreviation: member['state']))
+  end
+end
+
+rep_string = RestClient.get('https://api.propublica.org/congress/v1/115/house/members.json', headers={"X-API-Key": API_KEY})
+
+rep_data = JSON.parse(rep_string)
+counter = 0
+rep_data['results'][0]['members'].each do |member|
+  state = State.find_by(abbreviation: member['state'])
+  if member['in_office'] && state
+    district = member['district'] == "At-Large" ? 1 : member['district']
+
+    Rep.create(
+      name: "#{member['first_name']} #{member['last_name']}",
+      party: member['party'],
+      district: state.getUserDistrict(district)
+    )
+  else
+    counter +=1
+  end
+end
+
+puts "#{counter} reps not added due #{rep_data['results'][0]['members'].length}"
+
+#PA 18th
+#OH 12th
+#MI 13th
+#AZ 8th
