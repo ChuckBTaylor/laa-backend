@@ -10,17 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180120171139) do
+ActiveRecord::Schema.define(version: 20180120175039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "users", force: :cascade do |t|
-    t.string "district"
-    t.string "state"
-    t.string "phone_number"
+  create_table "districts", force: :cascade do |t|
+    t.string "number"
+    t.bigint "state_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["state_id"], name: "index_districts_on_state_id"
+  end
+
+  create_table "reps", force: :cascade do |t|
+    t.string "name"
+    t.bigint "district_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["district_id"], name: "index_reps_on_district_id"
+  end
+
+  create_table "senators", force: :cascade do |t|
+    t.bigint "state_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["state_id"], name: "index_senators_on_state_id"
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string "name"
+    t.string "abbreviation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "district_id"
+    t.integer "state_id"
+  end
+
+  add_foreign_key "districts", "states"
+  add_foreign_key "reps", "districts"
+  add_foreign_key "senators", "states"
 end
