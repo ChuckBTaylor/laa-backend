@@ -9,7 +9,7 @@
 require 'rest-client'
 require 'JSON'
 
-API_KEY = "hOsiWTOsFAa4UVwNKSWxME1RfXigd1mOs9owVI5g"
+require_relative '../secrets'
 
 al = State.create(name: "Alabama", abbreviation: "AL")
 counter = 1
@@ -361,7 +361,7 @@ counter = 1
   counter += 1
 end
 
-senator_string = RestClient.get('https://api.propublica.org/congress/v1/115/senate/members.json', headers={"X-API-Key": API_KEY})
+senator_string = RestClient.get("#{API_BASE}/115/senate/members.json", headers={"X-API-Key": API_KEY})
 
 senator_data = JSON.parse(senator_string)
 senator_data['results'][0]['members'].each do |member|
@@ -369,11 +369,13 @@ senator_data['results'][0]['members'].each do |member|
     Senator.create(
       name: "#{member['first_name']} #{member['last_name']}",
       party: member['party'],
-      state: State.find_by(abbreviation: member['state']))
+      state: State.find_by(abbreviation: member['state']),
+      member_id: member['id']
+    )
   end
 end
 
-rep_string = RestClient.get('https://api.propublica.org/congress/v1/115/house/members.json', headers={"X-API-Key": API_KEY})
+rep_string = RestClient.get("#{API_BASE}/115/house/members.json", headers={"X-API-Key": API_KEY})
 
 rep_data = JSON.parse(rep_string)
 counter = 0
@@ -385,7 +387,8 @@ rep_data['results'][0]['members'].each do |member|
     Rep.create(
       name: "#{member['first_name']} #{member['last_name']}",
       party: member['party'],
-      district: state.getUserDistrict(district)
+      district: state.getUserDistrict(district),
+      member_id: member['id']
     )
   else
     counter +=1
@@ -398,3 +401,7 @@ puts "#{counter} reps not added due #{rep_data['results'][0]['members'].length}"
 #OH 12th
 #MI 13th
 #AZ 8th
+
+User.create(phone_number: "+15018279722", state: ar, district: ar.getUserDistrict('2'))
+# User.create(phone_number: "+19164793073", state: ca, district: ca.getUserDistrict('9'))
+User.create(phone_number: "+16033031118", state: ny, district: ny.getUserDistrict('12'))
