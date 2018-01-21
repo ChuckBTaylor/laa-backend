@@ -402,6 +402,6 @@ puts "#{counter} reps not added due #{rep_data['results'][0]['members'].length}"
 #MI 13th
 #AZ 8th
 
-User.create(phone_number: "+15018279722", state: ar, district: ar.getUserDistrict('2'))
-# User.create(phone_number: "+19164793073", state: ca, district: ca.getUserDistrict('9'))
-User.create(phone_number: "+16033031118", state: ny, district: ny.getUserDistrict('12'))
+User.create(phone_number: shelby_number, state: ar, district: ar.getUserDistrict('2'))
+User.create(phone_number: will_number, state: co, district: co.getUserDistrict('2'))
+User.create(phone_number: shea_number, state: ny, district: ny.getUserDistrict('12'))
