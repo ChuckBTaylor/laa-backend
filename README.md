@@ -12,14 +12,14 @@ Needs Statement: People need a way to know who their legislators are, what they 
 Goals: 
 
 * Create a way to let users know who their legislators are: 
-As a user, I want to find out who my Senators and Representatives are based on my geolocation or by entering my residential address. 
+-As a user, I want to find out who my Senators and Representatives are based on my geolocation or by entering my residential address. 
 
 * Allow users to receive notifications about their legislators' voting activity: 
-As a user, I can sign up for text message updates so I can stay informed about my legislators' voting results.
-As a user, I can sign up for text message updates so I can stay informed about my legislators' voting agendas.
+-As a user, I can sign up for text message updates so I can stay informed about my legislators' voting results.
+-As a user, I can sign up for text message updates so I can stay informed about my legislators' voting agendas.
 
-* Create a way to connect to legislators to take action.
-As a user, I want to receive my legislators' contact info so I can let them know how I feel about their voting activity.
+* Create a way to connect to legislators to take action:
+-As a user, I want to receive my legislators' contact info so I can let them know how I feel about their voting activity.
 
 
 
