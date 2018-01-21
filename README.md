@@ -1,24 +1,22 @@
-# README
+# README - LAA
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+LAA 
 
 Things you may want to cover:
 
-* Ruby version
+* Technologies used: 
+Ruby on Rails
 
-* System dependencies
+* System dependencies: 
+Twilio
+Rest Client
+Pro Publica
 
-* Configuration
+* Database creation:
+Postgres
 
-* Database creation
+* Jasmine
 
-* Database initialization
+* Deployment instructions to come...
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+*
