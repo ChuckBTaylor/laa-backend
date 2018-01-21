@@ -42,3 +42,6 @@ Postgres
 * Deployment instructions to come...
 
 * Developed for Unglitch by Will Scripp, Shelby Rackley, Simon Chan, Jessica Franko
+
+[Imgur](https://i.imgur.com/XbPa2Kx.png)
+[Imgur](https://i.imgur.com/RfadEaX.jpg)
